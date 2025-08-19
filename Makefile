@@ -34,7 +34,7 @@ ifeq ($(ARCH),Darwin-i386\)
 CFLAGS += -DNEED_STRNDUP -DNEED_STRNDUPA -DNEED_STRDUPA
 else
 ifeq ($(ARCH),Darwin-arm64)
-CFLAGS += -DNEED_STRNDUP -DNEED_STRNDUPA -DNEED_STRDUPA
+CFLAGS += -DNEED_STRNDUP -DNEED_STRNDUPA -DNEED_STRDUPA 
 else
 CFLAGS += -DNEED_ALLOCA_H
 ifeq ($(findstring CYGWIN,$(ARCH)),CYGWIN)
@@ -53,6 +53,10 @@ endif
 CC = $(PREFIX)gcc
 AR = $(PREFIX)ar
 
+# use homebrew gcc on M1 mac
+ifeq ($(ARCH),Darwin-arm64)
+CC = gcc-15
+endif
 ifeq ($(DEBUG),1)
 CFLAGS += -O0 -ggdb
 #LIBS += -lefence -lpthread

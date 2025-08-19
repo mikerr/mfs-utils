@@ -357,14 +357,14 @@ static u32 get_blockcount(int fd )
 #if DKIOCGETBLOCKCOUNT32
 	ioctl(devs[i].fd, DKIOCGETBLOCKCOUNT32, &retval);
 #else
-#if DKIOCGETBLOCKCOUNT
+#if _DKIOCGETBLOCKCOUNT
 	{
 		long long nsectors;
 		ioctl(devs[i].fd, DKIOCGETBLOCKCOUNT, &nsectors );
 		retval = (u32) nsectors;
 	}
 #else
-	error("no ioctl to get block size");
+//	error("no ioctl to get block size");
 #endif
 #endif
 #endif
