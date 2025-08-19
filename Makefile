@@ -33,9 +33,13 @@ else
 ifeq ($(ARCH),Darwin-i386\)
 CFLAGS += -DNEED_STRNDUP -DNEED_STRNDUPA -DNEED_STRDUPA
 else
+ifeq ($(ARCH),Darwin-arm64)
+CFLAGS += -DNEED_STRNDUP -DNEED_STRNDUPA -DNEED_STRDUPA
+else
 CFLAGS += -DNEED_ALLOCA_H
 ifeq ($(findstring CYGWIN,$(ARCH)),CYGWIN)
 CFLAGS += -DNEED_STRNDUPA -DNEED_STRDUPA
+endif
 endif
 endif
 endif
